@@ -33,6 +33,46 @@ const testimonialsModalFunc = function () {
   overlay.classList.toggle("active");
 }
 
+
+/* */
+// portfolio variables
+const portfolioItems = document.querySelectorAll("[data-filter-item]");
+const portfolioModalContainer = document.querySelector("[data-portfolio-modal-container]");
+const portfolioModalCloseBtn = document.querySelector("[data-portfolio-modal-close-btn]");
+const portfolioOverlay = document.querySelector("[data-portfolio-overlay]");
+
+// modal variable for portfolio
+const portfolioModalImg = document.querySelector("[data-portfolio-modal-img]");
+const portfolioModalTitle = document.querySelector("[data-portfolio-modal-title]");
+const portfolioModalText = document.querySelector("[data-portfolio-modal-text]");
+
+// portfolio modal toggle function
+const portfolioModalFunc = function () {
+  portfolioModalContainer.classList.toggle("active");
+  portfolioOverlay.classList.toggle("active");
+};
+
+// add click event to all portfolio items
+portfolioItems.forEach(item => {
+  item.addEventListener("click", function () {
+    // Replace with your data sources for images, titles, and descriptions
+    portfolioModalImg.src = this.querySelector("img").src;
+    portfolioModalImg.alt = this.querySelector("img").alt;
+    portfolioModalTitle.innerHTML = this.querySelector(".project-title").innerHTML;
+    portfolioModalText.innerHTML = this.querySelector(".project-category").innerHTML;
+
+    portfolioModalFunc();
+  });
+});
+
+// add click event to portfolio modal close button
+portfolioModalCloseBtn.addEventListener("click", portfolioModalFunc);
+portfolioOverlay.addEventListener("click", portfolioModalFunc);
+/**/ 
+
+
+
+
 // add click event to all modal items
 for (let i = 0; i < testimonialsItem.length; i++) {
 
