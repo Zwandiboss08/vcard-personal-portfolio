@@ -35,39 +35,75 @@ const testimonialsModalFunc = function () {
 
 
 /* */
-// portfolio variables
-const portfolioItems = document.querySelectorAll("[data-filter-item]");
+// Portfolio modal variables
 const portfolioModalContainer = document.querySelector("[data-portfolio-modal-container]");
 const portfolioModalCloseBtn = document.querySelector("[data-portfolio-modal-close-btn]");
 const portfolioOverlay = document.querySelector("[data-portfolio-overlay]");
 
-// modal variable for portfolio
-const portfolioModalImg = document.querySelector("[data-portfolio-modal-img]");
-const portfolioModalTitle = document.querySelector("[data-portfolio-modal-title]");
-const portfolioModalText = document.querySelector("[data-portfolio-modal-text]");
+// Carousel variables
+const portfolioModalImgs = []; // Array to hold multiple images
+let currentImgIndex = 0;
+const modalImgElement = document.querySelector("[data-portfolio-modal-img]");
 
-// portfolio modal toggle function
+// Function to display the next image in the carousel
+function showNextImage() {
+  if (currentImgIndex < portfolioModalImgs.length - 1) {
+    currentImgIndex++;
+  } else {
+    currentImgIndex = 0;
+  }
+  updateModalImage();
+}
+
+// Function to display the previous image in the carousel
+function showPreviousImage() {
+  if (currentImgIndex > 0) {
+    currentImgIndex--;
+  } else {
+    currentImgIndex = portfolioModalImgs.length - 1;
+  }
+  updateModalImage();
+}
+
+// Function to update modal image based on the current index
+function updateModalImage() {
+  modalImgElement.src = portfolioModalImgs[currentImgIndex];
+}
+
+// Portfolio modal toggle function
 const portfolioModalFunc = function () {
   portfolioModalContainer.classList.toggle("active");
   portfolioOverlay.classList.toggle("active");
 };
 
-// add click event to all portfolio items
-portfolioItems.forEach(item => {
+// Add event listener to portfolio items
+document.querySelectorAll("[data-filter-item]").forEach(item => {
   item.addEventListener("click", function () {
-    // Replace with your data sources for images, titles, and descriptions
-    portfolioModalImg.src = this.querySelector("img").src;
-    portfolioModalImg.alt = this.querySelector("img").alt;
-    portfolioModalTitle.innerHTML = this.querySelector(".project-title").innerHTML;
-    portfolioModalText.innerHTML = this.querySelector(".project-category").innerHTML;
+    // Collect all images of the clicked portfolio project
+    const images = this.querySelectorAll("img");
+    portfolioModalImgs.length = 0; // Clear the array
+    images.forEach(img => portfolioModalImgs.push(img.src));
+
+    currentImgIndex = 0; // Start at the first image
+    updateModalImage(); // Show the first image
 
     portfolioModalFunc();
   });
 });
 
+// Add event listeners for next/prev buttons
+document.querySelector(".carousel-next-btn").addEventListener("click", showNextImage);
+document.querySelector(".carousel-prev-btn").addEventListener("click", showPreviousImage);
+
+// Close modal on overlay or close button click
+portfolioModalCloseBtn.addEventListener("click", portfolioModalFunc);
+portfolioOverlay.addEventListener("click", portfolioModalFunc);
+// //
+
 // add click event to portfolio modal close button
 portfolioModalCloseBtn.addEventListener("click", portfolioModalFunc);
 portfolioOverlay.addEventListener("click", portfolioModalFunc);
+/**/
 /**/ 
 
 

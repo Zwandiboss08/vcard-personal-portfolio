@@ -1803,7 +1803,46 @@ textarea.form-input::-webkit-resizer {
     background-color: #ff1c1c;
   }
 
-  /**/
+  /* test dari chatgpt*/
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-prev-btn, .carousel-next-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+.carousel-prev-btn {
+  left: 0;
+}
+
+.carousel-next-btn {
+  right: 0;
+}
+
+.modal-img-box {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-img {
+  max-width: 100%;
+  max-height: 600px;
+}
 
   /**
    * #RESUME
