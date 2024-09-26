@@ -33,80 +33,67 @@ const testimonialsModalFunc = function () {
   overlay.classList.toggle("active");
 }
 
-
-/* */
 // Portfolio modal variables
-const portfolioModalContainer = document.querySelector("[data-portfolio-modal-container]");
-const portfolioModalCloseBtn = document.querySelector("[data-portfolio-modal-close-btn]");
-const portfolioOverlay = document.querySelector("[data-portfolio-overlay]");
-
-// Carousel variables
-const portfolioModalImgs = []; // Array to hold multiple images
-let currentImgIndex = 0;
+const portfolioModalImgs = [];  // Array to hold multiple images
+let currentImgIndex = 0;  // Track the current image index
 const modalImgElement = document.querySelector("[data-portfolio-modal-img]");
 
-// Function to display the next image in the carousel
-function showNextImage() {
-  if (currentImgIndex < portfolioModalImgs.length - 1) {
-    currentImgIndex++;
-  } else {
-    currentImgIndex = 0;
-  }
-  updateModalImage();
-}
-
-// Function to display the previous image in the carousel
-function showPreviousImage() {
-  if (currentImgIndex > 0) {
-    currentImgIndex--;
-  } else {
-    currentImgIndex = portfolioModalImgs.length - 1;
-  }
-  updateModalImage();
-}
-
-// Function to update modal image based on the current index
+// Function to update the modal image based on the current index
 function updateModalImage() {
   modalImgElement.src = portfolioModalImgs[currentImgIndex];
 }
 
+// Function to show the next image in the carousel
+function showNextImage() {
+  if (currentImgIndex < portfolioModalImgs.length - 1) {
+    currentImgIndex++;
+  } else {
+    currentImgIndex = 0;  // Loop back to the first image
+  }
+  updateModalImage();
+}
+
+// Function to show the previous image in the carousel
+function showPreviousImage() {
+  if (currentImgIndex > 0) {
+    currentImgIndex--;
+  } else {
+    currentImgIndex = portfolioModalImgs.length - 1;  // Loop to the last image
+  }
+  updateModalImage();
+}
+
+// Event listeners for carousel buttons
+document.querySelector(".carousel-next-btn").addEventListener("click", showNextImage);
+document.querySelector(".carousel-prev-btn").addEventListener("click", showPreviousImage);
+
 // Portfolio modal toggle function
-const portfolioModalFunc = function () {
+const portfolioModalContainer = document.querySelector("[data-portfolio-modal-container]");
+const portfolioOverlay = document.querySelector("[data-portfolio-overlay]");
+const portfolioModalCloseBtn = document.querySelector("[data-portfolio-modal-close-btn]");
+
+const portfolioModalFunc = function() {
   portfolioModalContainer.classList.toggle("active");
   portfolioOverlay.classList.toggle("active");
 };
 
-// Add event listener to portfolio items
+// Add event listener to portfolio items to open the modal and load images
 document.querySelectorAll("[data-filter-item]").forEach(item => {
-  item.addEventListener("click", function () {
-    // Collect all images of the clicked portfolio project
-    const images = this.querySelectorAll("img");
-    portfolioModalImgs.length = 0; // Clear the array
-    images.forEach(img => portfolioModalImgs.push(img.src));
+  item.addEventListener("click", function() {
+    const images = this.querySelectorAll("img");  // Get all images for the project
+    portfolioModalImgs.length = 0;  // Clear the previous images array
+    images.forEach(img => portfolioModalImgs.push(img.src));  // Populate with new images
 
-    currentImgIndex = 0; // Start at the first image
-    updateModalImage(); // Show the first image
+    currentImgIndex = 0;  // Start at the first image
+    updateModalImage();  // Display the first image in the modal
 
-    portfolioModalFunc();
+    portfolioModalFunc();  // Open the modal
   });
 });
-
-// Add event listeners for next/prev buttons
-document.querySelector(".carousel-next-btn").addEventListener("click", showNextImage);
-document.querySelector(".carousel-prev-btn").addEventListener("click", showPreviousImage);
 
 // Close modal on overlay or close button click
 portfolioModalCloseBtn.addEventListener("click", portfolioModalFunc);
 portfolioOverlay.addEventListener("click", portfolioModalFunc);
-// //
-
-// add click event to portfolio modal close button
-portfolioModalCloseBtn.addEventListener("click", portfolioModalFunc);
-portfolioOverlay.addEventListener("click", portfolioModalFunc);
-/**/
-/**/ 
-
-
 
 
 // add click event to all modal items
