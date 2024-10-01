@@ -40,6 +40,8 @@ const modalImgElement = document.querySelector("[data-portfolio-modal-img]");
 
 // Function to update the modal image based on the current index
 function updateModalImage() {
+  modalImgElement.style.maxHeight = "100vh"; // Ensure the image doesn't exceed the modal height
+  modalImgElement.style.objectFit = "contain"; // Keep the aspect ratio without stretching
   modalImgElement.src = portfolioModalImgs[currentImgIndex];
 }
 

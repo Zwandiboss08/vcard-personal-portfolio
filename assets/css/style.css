@@ -1661,11 +1661,18 @@ textarea.form-input::-webkit-resizer {
     width: 65px;
   }
 
-  .modal-img-wrapper>img {
+  /* .modal-img-wrapper>img {
     display: block;
     flex-grow: 1;
     width: 35px;
+  } */
+
+  .modal-img-wrapper img {
+    max-height: 70vh; /* Set a maximum height */
+    width: auto; /* Ensure the width adjusts accordingly */
+    object-fit: contain; /* This ensures the image scales without stretching */
   }
+  
 
   /* clients */
 
@@ -1682,23 +1689,31 @@ textarea.form-input::-webkit-resizer {
 
   /* Portfolio Modal Container */
   .portfolio-modal-container {
+    /* position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 800px;
+    z-index: 1001;
+    border-radius: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease; */
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
-    /* Modal background color */
     box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
-    /* Shadow for depth */
-    width: 90%;
+    width: 90vw;
     max-width: 800px;
-    /* Adjusted for larger content */
+    max-height: 80vh;
     z-index: 1001;
-    /* Ensure it's on top of everything else */
     border-radius: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    overflow: hidden;
   }
 
   .portfolio-modal-container.active {
@@ -1860,6 +1875,19 @@ textarea.form-input::-webkit-resizer {
   padding: 10px;
   border-radius: 50%;
   font-size: 18px;
+  /**/
+  position: absolute;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  z-index: 10; /
+}
+
+.carousel-prev-btn {
+  left: 10px; /* Adjust the left side */
+}
+
+.carousel-next-btn {
+  right: 10px; /* Adjust the right side */
 }
 
 .carousel-prev-btn:hover,
@@ -2096,7 +2124,26 @@ textarea.form-input::-webkit-resizer {
     grid-template-columns: 1fr 1fr;
   }
 
+  .portfolio-modal-container {
+    width: 95vw; /* Make the modal slightly smaller on smaller devices */
+    max-height: 70vh; /* Adjust the height to be smaller */
+  }
 
+  .carousel-prev-btn,
+  .carousel-next-btn {
+    top: 40%; /* Adjust the positioning on smaller screens */
+  }
+
+  .modal-close-btn {
+    top: 10px; /* Reduce spacing on top for smaller devices */
+    right: 10px; /* Adjust the button's position */
+  }
+
+  .modal-img-wrapper img {
+    max-width: 100%;
+    height: auto; /* Maintain the image's aspect ratio */
+    object-fit: contain; /* Ensure the image fits inside the modal without stretching */
+  }
 
   /**
    * CONTACT
@@ -2240,7 +2287,6 @@ textarea.form-input::-webkit-resizer {
   }
 
 }
-
 
 
 
